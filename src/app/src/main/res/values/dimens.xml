@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="labelTextSize">14sp</dimen>
+    <dimen name="titleTextSize">19sp</dimen>
+    <dimen name="main_base_title_paddingBottom">10dp</dimen>
+    <dimen name="main_base_label_paddingBottom">10dp</dimen>
+    <dimen name="main_base_margin">5dp</dimen>
+    <dimen name="main_base_editText_firstname_height">48dp</dimen>
+    <dimen name="main_base_editText_firstname_width">250dp</dimen>
+</resources>

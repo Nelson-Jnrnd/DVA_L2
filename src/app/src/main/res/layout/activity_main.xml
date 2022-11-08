@@ -4,6 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/main_base_margin"
     tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/main_base_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/main_base_title_paddingBottom"
+        android:textSize="@dimen/titleTextSize"
+        android:text="@string/main_base_title"
+
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/main_base_label_firstname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/labelTextSize"
+        android:text="@string/main_base_firstname_title"
+
+        app:layout_constraintTop_toTopOf="@id/main_base_editText_firstname"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/main_base_label_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/labelTextSize"
+        android:text="@string/main_base_name_title"
+
+        app:layout_constraintTop_toTopOf="@id/main_base_editText_name"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/main_base_label_birthdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/main_base_label_paddingBottom"
+        android:textSize="@dimen/labelTextSize"
+        android:text="@string/main_base_birthdate_title"
+
+        app:layout_constraintTop_toTopOf="@id/main_base_editText_birthdate"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:id="@+id/main_base_label_nationality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/main_base_label_paddingBottom"
+        android:textSize="@dimen/labelTextSize"
+        android:text="@string/main_base_nationality_title"
+
+        app:layout_constraintTop_toTopOf="@id/main_base_editText_nationality"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:id="@+id/main_base_label_occupation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/main_base_label_paddingBottom"
+        android:textSize="@dimen/labelTextSize"
+        android:text="@string/main_base_occupation_title"
+
+        app:layout_constraintTop_toBottomOf="@id/main_base_label_nationality"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/main_base_editText_firstname"
+        android:layout_width="@dimen/main_base_editText_firstname_width"
+        android:layout_height="@dimen/main_base_editText_firstname_height"
+        android:paddingBottom="@dimen/main_base_label_paddingBottom"
+        android:inputType="textPersonName"
+        android:hint="@string/main_base_firstname_title"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_base_title"
+        />
+
+    <EditText
+        android:id="@+id/main_base_editText_name"
+        android:layout_width="@dimen/main_base_editText_firstname_width"
+        android:layout_height="@dimen/main_base_editText_firstname_height"
+        android:paddingBottom="@dimen/main_base_label_paddingBottom"
+        android:inputType="textPersonName"
+        android:hint="@string/main_base_name_title"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_base_editText_firstname"
+        />
+
+    <EditText
+        android:id="@+id/main_base_editText_birthdate"
+        android:layout_width="@dimen/main_base_editText_firstname_width"
+        android:layout_height="@dimen/main_base_editText_firstname_height"
+        android:inputType="textPersonName"
+        android:hint="@string/main_base_birthdate_title"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_base_editText_name"
+        />
+
+    <EditText
+        android:id="@+id/main_base_editText_nationality"
+        android:layout_width="@dimen/main_base_editText_firstname_width"
+        android:layout_height="@dimen/main_base_editText_firstname_height"
+        android:inputType="textPersonName"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_base_editText_birthdate"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
