@@ -17,7 +17,7 @@
         android:text="@string/main_base_title"
 
         app:layout_constraintTop_toTopOf="parent"
-        />
+    />
 
     <TextView
         android:id="@+id/main_base_label_firstname"
@@ -28,7 +28,7 @@
 
         app:layout_constraintTop_toTopOf="@id/main_base_editText_firstname"
         app:layout_constraintStart_toStartOf="parent"
-        />
+    />
 
     <TextView
         android:id="@+id/main_base_label_name"
@@ -129,6 +129,7 @@
     />
 
     <RadioGroup
+        android:id="@+id/main_base_radioGroup"
         android:layout_width="@dimen/main_base_editText_firstname_width"
         android:layout_height="@dimen/main_base_editText_firstname_height"
         app:layout_constraintStart_toStartOf="parent"
@@ -148,6 +149,89 @@
             android:text="@string/main_base_occupation_worker"
             android:onClick="onRadioButtonClicked" />
     </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/main_complement_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/main_base_title_paddingBottom"
+        android:text="@string/additional_title"
+        android:textSize="@dimen/titleTextSize"
+
+        app:layout_constraintTop_toBottomOf="@id/main_base_radioGroup"
+        tools:layout_editor_absoluteX="-62dp" />
+
+    <TextView
+        android:id="@+id/main_complement_label_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/labelTextSize"
+        android:text="@string/additional_email_title"
+
+        app:layout_constraintTop_toBottomOf="@id/main_complement_title"
+        app:layout_constraintStart_toStartOf="parent"
+    />
+
+    <EditText
+        android:id="@+id/main_complement_editText_email"
+        android:layout_width="@dimen/main_base_editText_firstname_width"
+        android:layout_height="@dimen/main_base_editText_firstname_height"
+        android:paddingBottom="@dimen/main_base_label_paddingBottom"
+        android:inputType="textPersonName"
+        android:hint="@string/additional_email_title"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_complement_title"
+    />
+
+    <TextView
+        android:id="@+id/main_complement_label_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/labelTextSize"
+        android:text="@string/additional_remarks_title"
+
+        app:layout_constraintTop_toBottomOf="@id/main_complement_editText_email"
+        app:layout_constraintStart_toStartOf="parent"
+    />
+
+    <EditText
+        android:id="@+id/main_complement_editText_comment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_complement_editText_comment_height"
+        android:paddingBottom="@dimen/main_base_label_paddingBottom"
+        android:inputType="textPersonName"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_complement_label_comment"
+    />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/main_complement_editText_comment">
+
+        <Button
+            android:id="@+id/main_complement_button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_cancel"
+            app:layout_constraintEnd_toStartOf="@id/main_complement_button_ok"
+        />
+
+        <Button
+            android:id="@+id/main_complement_button_ok"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/main_complement_button_margin"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_ok"
+            app:layout_constraintEnd_toEndOf="parent"
+        />
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
