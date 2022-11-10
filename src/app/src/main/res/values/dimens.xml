@@ -10,4 +10,5 @@
     <dimen name="main_base_editText_birthday_width">202dp</dimen>
     <dimen name="main_complement_editText_comment_height">90dp</dimen>
     <dimen name="main_complement_button_margin">70dp</dimen>
+    <dimen name="textView_width">180dp</dimen>
 </resources>

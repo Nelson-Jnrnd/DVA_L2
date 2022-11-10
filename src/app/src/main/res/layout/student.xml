@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/main_base_margin"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/main_specific_student_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/main_base_title_paddingBottom"
+        android:text="@string/main_specific_students_title"
+        android:textSize="@dimen/titleTextSize"
+        app:layout_constraintTop_toTopOf="parent"
+    />
+
+    <LinearLayout
+        android:id="@+id/main_specific_student_layout_school"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/main_specific_student_title">
+
+        <TextView
+            android:id="@+id/main_specific_student_label_school"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/labelTextSize"
+            android:text="@string/main_specific_school_title"
+
+        />
+        <EditText
+            android:id="@+id/main_specific_student_editText_school"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/main_base_editText_firstname_height"
+            android:paddingBottom="@dimen/main_base_label_paddingBottom"
+            android:layout_weight="1"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_specific_student_layout_diploma"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/main_specific_student_layout_school">
+
+        <TextView
+            android:id="@+id/main_specific_student_label_diploma"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/labelTextSize"
+            android:text="@string/main_specific_graduationyear_title"
+            />
+        <EditText
+            android:id="@+id/main_specific_student_editText_diploma"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/main_base_editText_firstname_height"
+            android:paddingBottom="@dimen/main_base_label_paddingBottom"
+            android:layout_weight="1"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
