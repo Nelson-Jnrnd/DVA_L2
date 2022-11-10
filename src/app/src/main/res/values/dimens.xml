@@ -7,4 +7,5 @@
     <dimen name="main_base_margin">5dp</dimen>
     <dimen name="main_base_editText_firstname_height">48dp</dimen>
     <dimen name="main_base_editText_firstname_width">250dp</dimen>
+    <dimen name="main_base_editText_birthday_width">202dp</dimen>
 </resources>
