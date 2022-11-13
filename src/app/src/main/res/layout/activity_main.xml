@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/main_base_margin"
-    tools:context=".MainActivity">
+    tools:context=".ControllerActivity">
 
     <TextView
         android:id="@+id/main_base_title"
@@ -113,6 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/main_base_editText_firstname_height"
         android:src="@drawable/cake"
+        android:contentDescription="@string/main_base_button_birthdate_contentDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_base_editText_name"
     />

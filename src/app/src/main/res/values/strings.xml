@@ -79,5 +79,6 @@
 
     <string name="btn_cancel">@android:string/cancel</string>
     <string name="btn_ok">@android:string/ok</string>
+    <string name="main_base_button_birthdate_contentDescription">cake button</string>
 
 </resources>
