@@ -152,6 +152,13 @@
     </RadioGroup>
 
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/main_base_radioGroup"
+    />
     <TextView
         android:id="@+id/main_complement_title"
         android:layout_width="match_parent"
@@ -160,7 +167,7 @@
         android:text="@string/additional_title"
         android:textSize="@dimen/titleTextSize"
 
-        app:layout_constraintTop_toBottomOf="@id/main_base_radioGroup"
+        app:layout_constraintTop_toBottomOf="@id/fragmentContainerView"
         tools:layout_editor_absoluteX="-62dp" />
 
     <TextView
@@ -207,6 +214,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_complement_label_comment"
     />
+"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

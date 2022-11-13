@@ -16,7 +16,6 @@ class ControllerActivity : AppCompatActivity() {
 
         val firstname = findViewById<EditText>(R.id.main_base_editText_firstname)
         val name = findViewById<EditText>(R.id.main_base_editText_name)
-        val occupation = findViewById<RadioGroup>(R.id.main_base_radioGroup)
 
         val nationalitiesSpinner = findViewById<Spinner>(R.id.main_base_spinner_nationality)
         nationalitiesSpinner.adapter = ArrayAdapter(
@@ -37,6 +36,34 @@ class ControllerActivity : AppCompatActivity() {
                 name.setText(it.person?.name)
                 nationalitiesSpinner.setSelection(resources.getStringArray(R.array.nationalities).indexOf(it.person?.nationality))
             }
+        }
+
+        val student = findViewById<RadioButton>(R.id.main_base_radioButton_student)
+        val employee = findViewById<RadioButton>(R.id.main_base_radioButton_employee)
+        val fragmentContainerView = findViewById<FrameLayout>(R.id.fragmentContainerView)
+
+        student.setOnClickListener {
+            loadStudentForm(fragmentContainerView)
+        }
+
+        employee.setOnClickListener {
+            loadEmployeeForm(fragmentContainerView)
+        }
+    }
+
+    private fun loadStudentForm(frameLayout: FrameLayout) {
+        if (supportFragmentManager.findFragmentByTag("studentForm") == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(frameLayout.id, StudentFragment.newInstance(), "studentForm")
+                .commit()
+        }
+    }
+
+    private fun loadEmployeeForm(frameLayout: FrameLayout) {
+        if (supportFragmentManager.findFragmentByTag("employeeForm") == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(frameLayout.id, EmployeeFragment.newInstance(), "employeeForm")
+                .commit()
         }
     }
 
