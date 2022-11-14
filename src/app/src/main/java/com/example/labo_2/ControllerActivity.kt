@@ -3,6 +3,8 @@ package com.example.labo_2
 import android.app.DatePickerDialog
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import java.util.*
 
+
 class ControllerActivity : AppCompatActivity() {
+
+    private val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +30,6 @@ class ControllerActivity : AppCompatActivity() {
         }
 
         val viewModel : PersonFormViewModel by viewModels()
-
-        viewModel.registerPerson(
-            Student("John", "Doe", Calendar.getInstance(), "Suisse", "EPFL", 2020, "johndoe@mail.com","Computer Science")
-        )
 
         lifecycleScope.launch {
             viewModel.uiState.collect {
@@ -49,7 +50,40 @@ class ControllerActivity : AppCompatActivity() {
             loadEmployeeForm(fragmentContainerView)
         }
 
+        val cancelButton = findViewById<Button>(R.id.main_complement_button_cancel)
+        cancelButton.setOnClickListener {
+            clearForm(findViewById(R.id.main_activity_layout))
+        }
+        val okButton = findViewById<Button>(R.id.main_complement_button_ok)
+        val birthday = findViewById<TextView>(R.id.main_base_textView_birthdate)
+        val nationality = findViewById<Spinner>(R.id.main_base_spinner_nationality)
+        val email = findViewById<EditText>(R.id.main_complement_editText_email)
+        val comments = findViewById<EditText>(R.id.main_complement_editText_comment)
 
+        okButton.setOnClickListener {
+            if (validateForm(findViewById(R.id.main_activity_layout))) {
+                val studentForm = getStudentForm()
+                if(studentForm != null) {
+                    val cal = Calendar.getInstance()
+                    cal.time = simpleDateFormat.parse(birthday.text.toString())
+                    viewModel.registerPerson(
+                        Student(
+                            name.text.toString(),
+                            firstname.text.toString(),
+                            cal,
+                            nationality.selectedItem.toString(),
+                            studentForm.getSchool(),
+                            studentForm.getDiplomaYear(),
+                            email.text.toString(),
+                            comments.text.toString()
+                        )
+                    )
+                    clearForm(findViewById(R.id.main_activity_layout))
+                }
+                println("OK")
+                println(viewModel.uiState.value)
+            }
+        }
     }
 
     private fun pickDate() {
@@ -59,8 +93,6 @@ class ControllerActivity : AppCompatActivity() {
         val datePicker = DatePickerDialog(this, { _, year, month, dayOfMonth ->
             val calendar = Calendar.getInstance()
             calendar.set(year, month, dayOfMonth)
-            val pattern = "dd-MM-yyyy"
-            val simpleDateFormat = SimpleDateFormat(pattern)
             val date = simpleDateFormat.format(calendar.time)
             birthday.text = date
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH))
@@ -81,6 +113,43 @@ class ControllerActivity : AppCompatActivity() {
                 .replace(frameLayout.id, EmployeeFragment.newInstance(), "employeeForm")
                 .commit()
         }
+    }
+
+    private fun getStudentForm(): StudentFragment? {
+        return supportFragmentManager.findFragmentByTag("studentForm") as? StudentFragment
+    }
+
+    private fun getEmployeeForm(): EmployeeFragment? {
+        return supportFragmentManager.findFragmentByTag("employeeForm") as? EmployeeFragment
+    }
+
+    private fun clearForm(group: ViewGroup) {
+        var i = 0
+        val count = group.childCount
+        while (i < count) {
+            val view: View = group.getChildAt(i)
+            if (view is EditText) {
+                view.setText("")
+            }
+            if (view is ViewGroup && view.childCount > 0) clearForm(view)
+            ++i
+        }
+    }
+
+    private fun validateForm(group: ViewGroup): Boolean {
+        var i = 0
+        val count = group.childCount
+        while (i < count) {
+            val view: View = group.getChildAt(i)
+            if (view is EditText) {
+                if (view.text.isEmpty()) {
+                    return false
+                }
+            }
+            if (view is ViewGroup && view.childCount > 0) validateForm(view)
+            ++i
+        }
+        return true
     }
 
 }

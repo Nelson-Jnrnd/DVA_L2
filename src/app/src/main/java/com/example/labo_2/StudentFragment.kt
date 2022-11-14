@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Spinner
 
 
 /**
@@ -20,6 +22,14 @@ class StudentFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_student, container, false)
+    }
+
+    fun getSchool() : String {
+        return requireView().findViewById<EditText>(R.id.main_specific_student_editText_school).text.toString()
+    }
+
+    fun getDiplomaYear() : Int {
+        return requireView().findViewById<EditText>(R.id.main_specific_student_editText_diploma).text.toString().toInt()
     }
 
     companion object {
