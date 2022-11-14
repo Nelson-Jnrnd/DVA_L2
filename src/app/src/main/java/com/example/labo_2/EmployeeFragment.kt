@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Spinner
 
 /**
@@ -21,6 +22,18 @@ class EmployeeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_employee, container, false)
+    }
+
+    fun getCompany() : String {
+        return requireView().findViewById<EditText>(R.id.main_specific_employee_editText_entreprise).text.toString()
+    }
+
+    fun getSector() : String {
+        return requireView().findViewById<Spinner>(R.id.main_specific_employee_spinner_sector).selectedItem.toString()
+    }
+
+    fun getExperience() : Int {
+        return requireView().findViewById<EditText>(R.id.main_specific_employee_editText_experience).text.toString().toInt()
     }
 
     companion object {

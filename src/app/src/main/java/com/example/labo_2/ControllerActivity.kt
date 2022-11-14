@@ -29,7 +29,7 @@ class ControllerActivity : AppCompatActivity() {
             pickDate()
         }
 
-        val viewModel : PersonFormViewModel by viewModels()
+        val viewModel: PersonFormViewModel by viewModels()
 
         lifecycleScope.launch {
             viewModel.uiState.collect {
@@ -62,24 +62,7 @@ class ControllerActivity : AppCompatActivity() {
 
         okButton.setOnClickListener {
             if (validateForm(findViewById(R.id.main_activity_layout))) {
-                val studentForm = getStudentForm()
-                if(studentForm != null) {
-                    val cal = Calendar.getInstance()
-                    cal.time = simpleDateFormat.parse(birthday.text.toString())
-                    viewModel.registerPerson(
-                        Student(
-                            name.text.toString(),
-                            firstname.text.toString(),
-                            cal,
-                            nationality.selectedItem.toString(),
-                            studentForm.getSchool(),
-                            studentForm.getDiplomaYear(),
-                            email.text.toString(),
-                            comments.text.toString()
-                        )
-                    )
-                    clearForm(findViewById(R.id.main_activity_layout))
-                }
+                registerForm()
                 println("OK")
                 println(viewModel.uiState.value)
             }
@@ -152,4 +135,58 @@ class ControllerActivity : AppCompatActivity() {
         return true
     }
 
+    private fun registerForm() {
+        val viewModel: PersonFormViewModel by viewModels()
+        val firstname = findViewById<EditText>(R.id.main_base_editText_firstname)
+        val name = findViewById<EditText>(R.id.main_base_editText_name)
+        val birthday = findViewById<TextView>(R.id.main_base_textView_birthdate)
+        val nationality = findViewById<Spinner>(R.id.main_base_spinner_nationality)
+        val email = findViewById<EditText>(R.id.main_complement_editText_email)
+        val comments = findViewById<EditText>(R.id.main_complement_editText_comment)
+
+        // Checks which radio button is checked
+        val occupation = findViewById<RadioGroup>(R.id.main_base_radioGroup)
+
+        when (occupation.checkedRadioButtonId) {
+            R.id.main_base_radioButton_student -> {
+                val studentForm = getStudentForm()
+                if (studentForm != null) {
+                    val cal = Calendar.getInstance()
+                    cal.time = simpleDateFormat.parse(birthday.text.toString())
+                    viewModel.registerPerson(
+                        Student(
+                            name.text.toString(),
+                            firstname.text.toString(),
+                            cal,
+                            nationality.selectedItem.toString(),
+                            studentForm.getSchool(),
+                            studentForm.getDiplomaYear(),
+                            email.text.toString(),
+                            comments.text.toString()
+                        )
+                    )
+                }
+            }
+            R.id.main_base_radioButton_employee -> {
+                val employeeForm = getEmployeeForm()
+                if (employeeForm != null) {
+                    val cal = Calendar.getInstance()
+                    cal.time = simpleDateFormat.parse(birthday.text.toString())
+                    viewModel.registerPerson(
+                        Worker(
+                            name.text.toString(),
+                            firstname.text.toString(),
+                            cal,
+                            nationality.selectedItem.toString(),
+                            employeeForm.getCompany(),
+                            employeeForm.getSector(),
+                            employeeForm.getExperience(),
+                            email.text.toString(),
+                            comments.text.toString()
+                        )
+                    )
+                }
+            }
+        }
+    }
 }
