@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 data class PersonFormUiState (
-    val person: Person? = null,
+    val person: List<Person> = emptyList(),
 )
 
 class PersonFormViewModel : ViewModel() {
@@ -14,7 +14,7 @@ class PersonFormViewModel : ViewModel() {
     val uiState: StateFlow<PersonFormUiState> = _uiState.asStateFlow()
 
     fun registerPerson(person: Person) {
-        _uiState.value = PersonFormUiState(person)
+        _uiState.value = PersonFormUiState(_uiState.value.person + person)
     }
 
 }

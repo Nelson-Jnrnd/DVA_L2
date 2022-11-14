@@ -36,6 +36,17 @@ class EmployeeFragment : Fragment() {
         return requireView().findViewById<EditText>(R.id.main_specific_employee_editText_experience).text.toString().toInt()
     }
 
+    fun validateForm(): Boolean {
+        return try {
+            val company = getCompany()
+            val sector = getSector()
+            val experience = getExperience()
+            company.isNotEmpty() && sector.isNotEmpty() && experience > 0
+        } catch (e: NumberFormatException) {
+            false
+        }
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

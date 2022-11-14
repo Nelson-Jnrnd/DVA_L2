@@ -24,12 +24,28 @@ class StudentFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_student, container, false)
     }
 
-    fun getSchool() : String {
+    fun getSchool(): String {
         return requireView().findViewById<EditText>(R.id.main_specific_student_editText_school).text.toString()
     }
 
-    fun getDiplomaYear() : Int {
-        return requireView().findViewById<EditText>(R.id.main_specific_student_editText_diploma).text.toString().toInt()
+    fun getDiplomaYear(): Int {
+        val year =
+            requireView().findViewById<EditText>(R.id.main_specific_student_editText_diploma).text.toString()
+        try {
+            return year.toInt()
+        } catch (e: NumberFormatException) {
+            throw NumberFormatException("Invalid year")
+        }
+    }
+
+    fun validateForm(): Boolean {
+        return try {
+            val school = getSchool()
+            val diplomaYear = getDiplomaYear()
+            school.isNotEmpty() && diplomaYear > 0
+        } catch (e: NumberFormatException) {
+            false
+        }
     }
 
     companion object {

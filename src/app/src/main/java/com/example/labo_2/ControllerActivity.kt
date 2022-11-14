@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
 import java.util.*
-
 
 class ControllerActivity : AppCompatActivity() {
 
@@ -21,23 +18,30 @@ class ControllerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val firstname = findViewById<EditText>(R.id.main_base_editText_firstname)
-        val name = findViewById<EditText>(R.id.main_base_editText_name)
+        // Set button listeners
         val birthdayBtn = findViewById<ImageButton>(R.id.main_base_button_birthdate)
-
         birthdayBtn.setOnClickListener {
             pickDate()
         }
 
-        val viewModel: PersonFormViewModel by viewModels()
+        val cancelButton = findViewById<Button>(R.id.main_complement_button_cancel)
+        cancelButton.setOnClickListener {
+            clearForm(findViewById(R.id.main_activity_layout))
+        }
 
-        lifecycleScope.launch {
-            viewModel.uiState.collect {
-                firstname.setText(it.person?.firstName)
-                name.setText(it.person?.name)
+        val okButton = findViewById<Button>(R.id.main_complement_button_ok)
+        okButton.setOnClickListener {
+            if (validateForm(findViewById(R.id.main_activity_layout))) {
+                if (registerForm()) {
+                    clearForm(findViewById(R.id.main_activity_layout))
+                    Toast.makeText(this, "Person registered", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Invalid Form", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
+        // Set radio button listeners
         val student = findViewById<RadioButton>(R.id.main_base_radioButton_student)
         val employee = findViewById<RadioButton>(R.id.main_base_radioButton_employee)
         val fragmentContainerView = findViewById<FrameLayout>(R.id.fragmentContainerView)
@@ -50,23 +54,7 @@ class ControllerActivity : AppCompatActivity() {
             loadEmployeeForm(fragmentContainerView)
         }
 
-        val cancelButton = findViewById<Button>(R.id.main_complement_button_cancel)
-        cancelButton.setOnClickListener {
-            clearForm(findViewById(R.id.main_activity_layout))
-        }
-        val okButton = findViewById<Button>(R.id.main_complement_button_ok)
-        val birthday = findViewById<TextView>(R.id.main_base_textView_birthdate)
-        val nationality = findViewById<Spinner>(R.id.main_base_spinner_nationality)
-        val email = findViewById<EditText>(R.id.main_complement_editText_email)
-        val comments = findViewById<EditText>(R.id.main_complement_editText_comment)
 
-        okButton.setOnClickListener {
-            if (validateForm(findViewById(R.id.main_activity_layout))) {
-                registerForm()
-                println("OK")
-                println(viewModel.uiState.value)
-            }
-        }
     }
 
     private fun pickDate() {
@@ -128,14 +116,45 @@ class ControllerActivity : AppCompatActivity() {
                 if (view.text.isEmpty()) {
                     return false
                 }
+            } else if (view is Spinner) {
+                if (view.selectedItemPosition == Spinner.INVALID_POSITION) {
+                    return false
+                }
+            } else if (view is RadioGroup) {
+                if (view.checkedRadioButtonId == -1) {
+                    return false
+                }
+            } else if (view is ViewGroup && view.childCount > 0) {
+                validateForm(view)
             }
-            if (view is ViewGroup && view.childCount > 0) validateForm(view)
             ++i
         }
+
+        val occupation = findViewById<RadioGroup>(R.id.main_base_radioGroup)
+
+        when (occupation.checkedRadioButtonId) {
+            R.id.main_base_radioButton_student -> {
+                val studentForm = getStudentForm()
+                if (studentForm != null) {
+                    if (studentForm.validateForm()) {
+                        return true
+                    }
+                }
+            }
+            R.id.main_base_radioButton_employee -> {
+                val employeeForm = getEmployeeForm()
+                if (employeeForm != null) {
+                    if (employeeForm.validateForm()) {
+                        return true
+                    }
+                }
+            }
+        }
+
         return true
     }
 
-    private fun registerForm() {
+    private fun registerForm(): Boolean {
         val viewModel: PersonFormViewModel by viewModels()
         val firstname = findViewById<EditText>(R.id.main_base_editText_firstname)
         val name = findViewById<EditText>(R.id.main_base_editText_name)
@@ -165,6 +184,8 @@ class ControllerActivity : AppCompatActivity() {
                             comments.text.toString()
                         )
                     )
+                    println(viewModel.uiState.value)
+                    return true
                 }
             }
             R.id.main_base_radioButton_employee -> {
@@ -185,8 +206,11 @@ class ControllerActivity : AppCompatActivity() {
                             comments.text.toString()
                         )
                     )
+                    println(viewModel.uiState.value)
+                    return true
                 }
             }
         }
+        return false
     }
 }
