@@ -67,6 +67,7 @@
             android:contentDescription="@string/nationality_empty"
             android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="parent"
+            android:entries="@array/sectors"
             />
     </LinearLayout>
 

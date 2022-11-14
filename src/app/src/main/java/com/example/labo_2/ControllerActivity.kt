@@ -1,12 +1,14 @@
 package com.example.labo_2
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.DatePickerDialog
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.widget.*
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import java.util.Calendar
+import java.util.*
 
 class ControllerActivity : AppCompatActivity() {
 
@@ -16,13 +18,11 @@ class ControllerActivity : AppCompatActivity() {
 
         val firstname = findViewById<EditText>(R.id.main_base_editText_firstname)
         val name = findViewById<EditText>(R.id.main_base_editText_name)
+        val birthdayBtn = findViewById<ImageButton>(R.id.main_base_button_birthdate)
 
-        val nationalitiesSpinner = findViewById<Spinner>(R.id.main_base_spinner_nationality)
-        nationalitiesSpinner.adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_item,
-            resources.getStringArray(R.array.nationalities)
-        )
+        birthdayBtn.setOnClickListener {
+            pickDate()
+        }
 
         val viewModel : PersonFormViewModel by viewModels()
 
@@ -34,7 +34,6 @@ class ControllerActivity : AppCompatActivity() {
             viewModel.uiState.collect {
                 firstname.setText(it.person?.firstName)
                 name.setText(it.person?.name)
-                nationalitiesSpinner.setSelection(resources.getStringArray(R.array.nationalities).indexOf(it.person?.nationality))
             }
         }
 
@@ -49,6 +48,23 @@ class ControllerActivity : AppCompatActivity() {
         employee.setOnClickListener {
             loadEmployeeForm(fragmentContainerView)
         }
+
+
+    }
+
+    private fun pickDate() {
+        val birthday = findViewById<TextView>(R.id.main_base_textView_birthdate)
+
+        val c = Calendar.getInstance()
+        val datePicker = DatePickerDialog(this, { _, year, month, dayOfMonth ->
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonth)
+            val pattern = "dd-MM-yyyy"
+            val simpleDateFormat = SimpleDateFormat(pattern)
+            val date = simpleDateFormat.format(calendar.time)
+            birthday.text = date
+        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH))
+        datePicker.show()
     }
 
     private fun loadStudentForm(frameLayout: FrameLayout) {
