@@ -19,7 +19,6 @@
             android:paddingBottom="@dimen/main_base_title_paddingBottom"
             android:text="@string/main_base_title"
             android:textSize="@dimen/titleTextSize"
-
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -28,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="@string/main_base_firstname_title"
             android:textSize="@dimen/labelTextSize"
-
+            app:layout_constraintBaseline_toBaselineOf="@+id/main_base_editText_firstname"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/main_base_editText_firstname" />
 
@@ -38,7 +37,6 @@
             android:layout_height="wrap_content"
             android:text="@string/main_base_name_title"
             android:textSize="@dimen/labelTextSize"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/main_base_editText_name" />
 
@@ -49,7 +47,6 @@
             android:paddingBottom="@dimen/main_base_label_paddingBottom"
             android:text="@string/main_base_birthdate_title"
             android:textSize="@dimen/labelTextSize"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/main_base_textView_birthdate" />
 
@@ -60,7 +57,7 @@
             android:paddingBottom="@dimen/main_base_label_paddingBottom"
             android:text="@string/main_base_nationality_title"
             android:textSize="@dimen/labelTextSize"
-
+            app:layout_constraintBaseline_toBaselineOf="@+id/main_base_spinner_nationality"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/main_base_spinner_nationality" />
 
@@ -71,7 +68,6 @@
             android:paddingTop="@dimen/main_base_label_paddingBottom"
             android:text="@string/main_base_occupation_title"
             android:textSize="@dimen/labelTextSize"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_base_label_nationality" />
 
@@ -101,7 +97,6 @@
             android:id="@+id/main_base_textView_birthdate"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/main_base_editText_firstname_height"
-
             app:layout_constraintEnd_toStartOf="@id/main_base_button_birthdate"
             app:layout_constraintStart_toEndOf="@id/main_base_label_birthdate"
             app:layout_constraintTop_toBottomOf="@id/main_base_editText_name" />
@@ -171,7 +166,7 @@
             android:layout_height="wrap_content"
             android:text="@string/additional_email_title"
             android:textSize="@dimen/labelTextSize"
-
+            app:layout_constraintBaseline_toBaselineOf="@+id/main_complement_editText_email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_complement_title" />
 
@@ -182,7 +177,6 @@
             android:hint="@string/additional_email_title"
             android:inputType="textEmailAddress"
             android:paddingBottom="@dimen/main_base_label_paddingBottom"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_complement_title" />
 
