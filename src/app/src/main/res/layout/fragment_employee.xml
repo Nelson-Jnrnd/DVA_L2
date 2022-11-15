@@ -15,84 +15,76 @@
         android:paddingBottom="@dimen/main_base_title_paddingBottom"
         android:text="@string/main_specific_workers_title"
         android:textSize="@dimen/titleTextSize"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/main_specific_student_layout_school"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/main_specific_employee_label_entreprise"
+        android:layout_width="@dimen/textView_width"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/main_specific_employee_title">
+        android:text="@string/main_specific_compagny_title"
+        android:textSize="@dimen/labelTextSize"
+        app:layout_constraintBaseline_toBaselineOf="@+id/main_specific_employee_editText_entreprise"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_specific_employee_title" />
 
-        <TextView
-            android:id="@+id/main_specific_employee_label_entreprise"
-            android:layout_width="@dimen/textView_width"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/labelTextSize"
-            android:text="@string/main_specific_compagny_title"
+    <EditText
+        android:id="@+id/main_specific_employee_editText_entreprise"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/main_base_editText_firstname_height"
+        android:layout_weight="1"
+        android:inputType="textPersonName"
+        android:paddingBottom="@dimen/main_base_label_paddingBottom"
+        app:layout_constraintEnd_toEndOf="@+id/main_specific_employee_title"
+        app:layout_constraintStart_toEndOf="@+id/main_specific_employee_label_entreprise"
+        app:layout_constraintTop_toBottomOf="@+id/main_specific_employee_title"
+    />
 
-            />
-        <EditText
-            android:id="@+id/main_specific_employee_editText_entreprise"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/main_base_editText_firstname_height"
-            android:paddingBottom="@dimen/main_base_label_paddingBottom"
-            android:layout_weight="1"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/main_specific_employee_layout_sector"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/main_specific_employee_label_sector"
+        android:layout_width="@dimen/textView_width"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/main_specific_student_layout_school">
+        android:layout_gravity="center"
+        android:text="@string/main_specific_sector_title"
+        android:textSize="@dimen/labelTextSize"
+        app:layout_constraintBaseline_toBaselineOf="@+id/main_specific_employee_spinner_sector"
+        app:layout_constraintTop_toBottomOf="@+id/main_specific_employee_label_entreprise"
+        app:layout_constraintStart_toStartOf="parent"
+    />
 
-        <TextView
-            android:id="@+id/main_specific_employee_label_sector"
-            android:layout_width="@dimen/textView_width"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/labelTextSize"
-            android:text="@string/main_specific_sector_title"
-            android:layout_gravity="center"
-            />
-        <Spinner
-            android:id="@+id/main_specific_employee_spinner_sector"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/main_base_editText_firstname_height"
-            android:inputType="textPersonName"
-            android:contentDescription="@string/nationality_empty"
-            android:layout_weight="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:entries="@array/sectors"
-            />
-    </LinearLayout>
+    <Spinner
+        android:id="@+id/main_specific_employee_spinner_sector"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/main_base_editText_firstname_height"
+        android:layout_weight="1"
+        android:contentDescription="@string/nationality_empty"
+        android:entries="@array/sectors"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_specific_employee_label_sector"
+        app:layout_constraintTop_toBottomOf="@+id/main_specific_employee_editText_entreprise"
+    />
 
-    <LinearLayout
-        android:id="@+id/main_specific_employee_layout_experience"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/main_specific_employee_label_experience"
+        android:layout_width="@dimen/textView_width"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/main_specific_employee_layout_sector">
+        android:text="@string/main_specific_experience_title"
+        android:textSize="@dimen/labelTextSize"
+        app:layout_constraintTop_toBottomOf="@+id/main_specific_employee_label_sector"
+        app:layout_constraintBaseline_toBaselineOf="@+id/main_specific_employee_editText_experience"
+        app:layout_constraintStart_toStartOf="parent"
+    />
 
-        <TextView
-            android:id="@+id/main_specific_employee_label_experience"
-            android:layout_width="@dimen/textView_width"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/labelTextSize"
-            android:text="@string/main_specific_experience_title"
-            />
-        <EditText
-            android:id="@+id/main_specific_employee_editText_experience"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/main_base_editText_firstname_height"
-            android:paddingBottom="@dimen/main_base_label_paddingBottom"
-            android:layout_weight="1"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/main_specific_employee_editText_experience"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/main_base_editText_firstname_height"
+        android:layout_weight="1"
+        android:inputType="textPersonName"
+        android:paddingBottom="@dimen/main_base_label_paddingBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_specific_employee_label_experience"
+        app:layout_constraintTop_toBottomOf="@+id/main_specific_employee_spinner_sector" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

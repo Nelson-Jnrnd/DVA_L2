@@ -137,14 +137,12 @@
                 android:id="@+id/main_base_radioButton_student"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"
                 android:text="@string/main_base_occupation_student" />
 
             <RadioButton
                 android:id="@+id/main_base_radioButton_employee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"
                 android:text="@string/main_base_occupation_worker" />
         </RadioGroup>
 
@@ -182,7 +180,7 @@
             android:layout_width="@dimen/main_base_editText_firstname_width"
             android:layout_height="@dimen/main_base_editText_firstname_height"
             android:hint="@string/additional_email_title"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:paddingBottom="@dimen/main_base_label_paddingBottom"
 
             app:layout_constraintEnd_toEndOf="parent"
