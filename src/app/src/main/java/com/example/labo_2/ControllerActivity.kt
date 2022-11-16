@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import java.util.*
 class ControllerActivity : AppCompatActivity() {
 
     private val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+    private val TAG = "ControllerActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -206,7 +208,7 @@ class ControllerActivity : AppCompatActivity() {
                             comments.text.toString()
                         )
                     )
-                    println(viewModel.uiState.value)
+                    Log.v(TAG, viewModel.uiState.value.toString())
                     return true
                 }
             }
@@ -228,7 +230,7 @@ class ControllerActivity : AppCompatActivity() {
                             comments.text.toString()
                         )
                     )
-                    println(viewModel.uiState.value)
+                    Log.v(TAG, viewModel.uiState.value.toString())
                     return true
                 }
             }
