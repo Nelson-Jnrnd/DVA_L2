@@ -60,13 +60,13 @@ class ControllerActivity : AppCompatActivity() {
     }
 
     private fun controlValidationForm() {
-        if (validateForm(findViewById(R.id.main_activity_layout))) {
+        if (validateForm()) {
             if (registerForm()) {
                 clearForm(findViewById(R.id.main_activity_layout))
                 Toast.makeText(this, "Person registered", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Invalid Form", Toast.LENGTH_SHORT).show()
             }
+        } else {
+            Toast.makeText(this, "Invalid Form", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -120,52 +120,45 @@ class ControllerActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateForm(group: ViewGroup): Boolean {
-        var i = 0
-        val count = group.childCount
-        while (i < count) {
-            val view: View = group.getChildAt(i)
-            if (view is EditText) {
-                if (view.text.isEmpty()) {
-                    return false
-                }
-            } else if (view is Spinner) {
-                if (view.selectedItem.toString() == "Sélectionner" || view.selectedItemPosition == Spinner.INVALID_POSITION) {
-                    return false
-                }
-            } else if (view is RadioGroup) {
-                if (view.checkedRadioButtonId == -1) {
-                    return false
-                }
-            } else if (view is ViewGroup && view.childCount > 0) {
-                validateForm(view)
-            }
-            ++i
+
+    private fun validateForm(): Boolean {
+        val firstname = findViewById<EditText>(R.id.main_base_editText_firstname)
+        val name = findViewById<EditText>(R.id.main_base_editText_name)
+        val birthday = findViewById<TextView>(R.id.main_base_textView_birthdate)
+        val nationality = findViewById<Spinner>(R.id.main_base_spinner_nationality)
+        val email = findViewById<EditText>(R.id.main_complement_editText_email)
+        val comments = findViewById<EditText>(R.id.main_complement_editText_comment)
+
+        if(firstname.length() == 0 || name.length() == 0 || birthday.length() == 0
+            || nationality.selectedItem.toString() == "Sélectionner" || email.length() == 0 || comments.length() == 0){
+            return false
         }
 
         val occupation = findViewById<RadioGroup>(R.id.main_base_radioGroup)
 
         when (occupation.checkedRadioButtonId) {
             R.id.main_base_radioButton_student -> {
-                val studentForm = getStudentForm()
-                if (studentForm != null) {
-                    if (studentForm.validateForm()) {
-                        return true
-                    }
+                val school = findViewById<EditText>(R.id.main_specific_student_editText_school)
+                val yearDiploma = findViewById<EditText>(R.id.main_specific_student_editText_diploma)
+
+                if (school.length() == 0 || yearDiploma.length() == 0) {
+                    return false
                 }
             }
             R.id.main_base_radioButton_employee -> {
-                val employeeForm = getEmployeeForm()
-                if (employeeForm != null) {
-                    if (employeeForm.validateForm()) {
-                        return true
-                    }
+                val entreprise = findViewById<EditText>(R.id.main_specific_employee_editText_entreprise)
+                val experience = findViewById<EditText>(R.id.main_specific_employee_editText_experience)
+                val sector = findViewById<Spinner>(R.id.main_specific_employee_spinner_sector)
+
+                if (entreprise.length() == 0 || experience.length() == 0 || experience.length() == 0
+                    || sector.selectedItem.toString() == "Sélectionner" ) {
+                    return false
                 }
             }
         }
-
         return true
     }
+
 
     private fun registerForm(): Boolean {
         val viewModel: PersonFormViewModel by viewModels()
