@@ -3,6 +3,8 @@ package com.example.labo_2
 import android.app.DatePickerDialog
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -80,6 +82,8 @@ class ControllerActivity : AppCompatActivity() {
             val date = simpleDateFormat.format(calendar.time)
             birthday.text = date
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH))
+        //Limit date choices to present
+        datePicker.datePicker.setMaxDate(System.currentTimeMillis())
         datePicker.show()
     }
 
@@ -109,11 +113,18 @@ class ControllerActivity : AppCompatActivity() {
 
     private fun clearForm(group: ViewGroup) {
         var i = 0
+        val birthday = findViewById<TextView>(R.id.main_base_textView_birthdate)
         val count = group.childCount
         while (i < count) {
             val view: View = group.getChildAt(i)
             if (view is EditText) {
                 view.setText("")
+            }
+            if (view.id == birthday.id) {
+                birthday.setText("")
+            }
+            if (view is Spinner) {
+                view.setSelection(0)
             }
             if (view is ViewGroup && view.childCount > 0) clearForm(view)
             ++i
@@ -129,13 +140,19 @@ class ControllerActivity : AppCompatActivity() {
         val email = findViewById<EditText>(R.id.main_complement_editText_email)
         val comments = findViewById<EditText>(R.id.main_complement_editText_comment)
 
+        //Since nothing is specified in the lab instructions, we decided that every fields are required
         if(firstname.length() == 0 || name.length() == 0 || birthday.length() == 0
-            || nationality.selectedItem.toString() == "Sélectionner" || email.length() == 0 || comments.length() == 0){
+            || nationality.selectedItem.toString() == "Sélectionner" || comments.length() == 0){
+            return false
+        }
+
+        //Email format control
+        if(TextUtils.isEmpty(email.text.toString()) || !Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()){
             return false
         }
 
         val occupation = findViewById<RadioGroup>(R.id.main_base_radioGroup)
-
+        //Check wich radioButton is pressed and control fields
         when (occupation.checkedRadioButtonId) {
             R.id.main_base_radioButton_student -> {
                 val school = findViewById<EditText>(R.id.main_specific_student_editText_school)
@@ -158,7 +175,6 @@ class ControllerActivity : AppCompatActivity() {
         }
         return true
     }
-
 
     private fun registerForm(): Boolean {
         val viewModel: PersonFormViewModel by viewModels()
