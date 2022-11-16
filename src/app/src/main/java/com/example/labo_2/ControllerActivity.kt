@@ -5,6 +5,7 @@ import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -31,14 +32,15 @@ class ControllerActivity : AppCompatActivity() {
 
         val okButton = findViewById<Button>(R.id.main_complement_button_ok)
         okButton.setOnClickListener {
-            if (validateForm(findViewById(R.id.main_activity_layout))) {
-                if (registerForm()) {
-                    clearForm(findViewById(R.id.main_activity_layout))
-                    Toast.makeText(this, "Person registered", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Invalid Form", Toast.LENGTH_SHORT).show()
-                }
+            controlValidationForm()
+        }
+
+        val emailEdit = findViewById<EditText>(R.id.main_complement_editText_email)
+        emailEdit.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                controlValidationForm()
             }
+            false
         }
 
         // Set radio button listeners
@@ -55,6 +57,17 @@ class ControllerActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun controlValidationForm() {
+        if (validateForm(findViewById(R.id.main_activity_layout))) {
+            if (registerForm()) {
+                clearForm(findViewById(R.id.main_activity_layout))
+                Toast.makeText(this, "Person registered", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Invalid Form", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun pickDate() {
@@ -117,7 +130,7 @@ class ControllerActivity : AppCompatActivity() {
                     return false
                 }
             } else if (view is Spinner) {
-                if (view.selectedItemPosition == Spinner.INVALID_POSITION) {
+                if (view.selectedItem.toString() == "Sélectionner" || view.selectedItemPosition == Spinner.INVALID_POSITION) {
                     return false
                 }
             } else if (view is RadioGroup) {

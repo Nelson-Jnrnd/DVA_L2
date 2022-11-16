@@ -81,7 +81,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/main_base_editText_firstname_height"
         android:layout_weight="1"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:paddingBottom="@dimen/main_base_label_paddingBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/main_specific_employee_label_experience"
